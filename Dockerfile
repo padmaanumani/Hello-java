@@ -20,8 +20,8 @@ RUN rm -rf /opt/tomcat/webapps/ROOT
 ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
-#EXPOSE private-ip:9090
-EXPOSE 0.0.0.0:9090
+#EXPOSE 9090
+#EXPOSE 9191
 
 VOLUME "/opt/tomcat/webapps"
 WORKDIR /opt/tomcat
