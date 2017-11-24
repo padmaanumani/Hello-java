@@ -1,47 +1,26 @@
-pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        echo '---Build started----!'
-        git 'https://github.com/kalaiganeshan/Hello-java.git'
-        sh 'mvn clean package -DskipTests=true'
-      }
-    }
-    stage('Test') {
-      parallel {
-        stage('Unit Tests') {
-          steps {
-            echo 'Unit Tests Are Awesome!'
-          }
-        }
-        stage('Integration Tests') {
-          steps {
-            echo 'Integration Tests Are Awesome!'
-          }
-        }
-        stage('Smoke Tests') {
-          steps {
-            echo 'Where There is Smoke there is Fire!!!'
-          }
-        }
-        stage('Reg Test') {
-          steps {
-            echo 'Reg Test executed'
-          }
-        }
-      }
-    }
-    stage('CodeAnalysis') {
-      steps {
-        echo '-----Sonar Analysis started----'
-        sh 'mvn sonar:sonar -Dsonar.host.url=http://54.242.162.103:9000/sonar/ -Dsonar.sources=src/main/java'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Ship It!'
-      }
-    }
-  }
+node {
+   // Mark the code checkout 'stage'....
+   stage 'Checkout'
+   checkout scm
+
+   sh "sudo chown jenkins /var/run/docker.sock"
+   sh "sudo chown jenkins /usr/bin/docker"
+
+   stage 'Build application'
+   def mvnHome = tool 'M3'
+   sh "${mvnHome}/bin/mvn clean package"
+  
+   stage 'Build Docker image'
+
+   def image = docker.build('devopsbasservice/hello-java:1.0', '.')
+
+   stage 'Acceptance Tests'
+   image.withRun('-p 9191:9090') {c ->
+        sh "${mvnHome}/bin/mvn verify"
+   }
+   stage 'Push image'
+   docker.withRegistry("https://index.docker.io/v1/", "docker-registry") {
+          image.push()
+   }
+
 }
