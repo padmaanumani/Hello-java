@@ -18,9 +18,6 @@ node {
    image.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
    }
-   stage 'Push image'
-   docker.withRegistry("https://54.227.175.229:8446/", "nexuscreds") {
-          image.push('latest')
-   }
-
+   stage 'Push image'   
+   image.push('latest')
 }
