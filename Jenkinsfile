@@ -10,18 +10,22 @@ node {
    def mvnHome = tool 'M3'
    sh "${mvnHome}/bin/mvn clean package"
   
-   stage 'Build Docker image'
+   /*stage 'Build Docker image'
 
    def image = docker.build('jenkins-hello-java:latest', '.')
 
    stage 'Acceptance Tests'
    image.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
-   }
+   }*/
   
    stage 'Push image'
    
-   docker.withRegistry('https://54.227.175.229:8446', 'nexus-admin') {       
+   docker.withRegistry('https://54.227.175.229:8446', 'nexus-admin') { 
+       def image = docker.build('jenkins-hello-java:latest', '.')  
+         image.withRun('-p 9191:9090') {c ->
+         sh "${mvnHome}/bin/mvn verify"
+            }
         /* Push the container to the custom Registry */
         image.push()
     }
