@@ -20,7 +20,7 @@ node {
   
    stage 'Push image'
    
-   docker.withRegistry('https://54.227.175.229:8446', 'nexus-admin') { 
+   docker.withRegistry('https://nexus-repo', 'nexus-admin') { 
       /* def image = docker.build('jenkins-hello-java:latest', '.')  
          image.withRun('-p 9191:9090') {c ->
          sh "${mvnHome}/bin/mvn verify"
