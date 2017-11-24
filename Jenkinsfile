@@ -10,14 +10,19 @@ node {
    def mvnHome = tool 'M3'
    sh "${mvnHome}/bin/mvn clean package"
   
-   stage 'Build Docker image'
+  // stage 'Build Docker image'
 
-   def image = docker.build('jenkins-hello-java:latest', '.')
+//   def image = docker.build('jenkins-hello-java:latest', '.')
 
    stage 'Acceptance Tests'
    image.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
    }
-   stage 'Push image'   
-   image.push('latest')
+   stage 'Build & Push image' 
+   docker.withRegistry('https://54.227.175.229:8446', 'nexuscreds') {
+        def customImage = docker.build("hello-java:${env.BUILD_ID}")
+        /* Push the container to the custom Registry */
+        customImage.push()
+    }
+  
 }
