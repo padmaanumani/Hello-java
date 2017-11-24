@@ -11,7 +11,7 @@ node {
    sh "${mvnHome}/bin/mvn clean package"
   
    stage 'Build Docker image'
-   def image = docker.build('jenkins-docker/jenkins-hello-java:${BUILD_TAG}', '.')
+   def image = docker.build('jenkins-hello-java:${BUILD_TAG}', '.')
 
    stage 'Acceptance Tests'
    image.withRun('-p 9191:9090') {c ->
