@@ -19,7 +19,7 @@ node {
         sh "${mvnHome}/bin/mvn verify"
    }
    stage 'Push image'
-   docker.withRegistry("http://54.227.175.229:8444/", "nexuscreds") {
+   docker.withRegistry("https://54.227.175.229:8446/", "nexuscreds") {
           image.push()
    }
 
