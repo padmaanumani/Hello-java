@@ -21,8 +21,8 @@ node {
    */
    stage 'Build & Push image'
    
-   docker.withRegistry('https://54.227.175.229:8446', 'nexuscreds') {
-        def customImage = docker.build("hello-java:latest")
+   docker.withRegistry('https://54.227.175.229:8446', 'nexus-admin') {
+        def customImage = docker.build("jenkins-docker/hello-java:latest")
       
         customImage.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
