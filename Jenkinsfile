@@ -26,7 +26,7 @@ node {
       
         customImage.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
-           
+        }  
         /* Push the container to the custom Registry */
         customImage.push()
     }
