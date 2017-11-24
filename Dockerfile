@@ -18,7 +18,6 @@ ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
 EXPOSE 9090
-EXPOSE 9009
 VOLUME "/opt/tomcat/webapps"
 WORKDIR /opt/tomcat
 
