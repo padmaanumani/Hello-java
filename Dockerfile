@@ -2,6 +2,7 @@ FROM java:8-jdk
 
 MAINTAINER JeyanthiBalakrishnan
 
+ENV TOMCAT_VERSION 8.0.47
 
 # Get Tomcat
 RUN wget --quiet --no-cookies http://apache.rediris.es/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/tomcat.tgz 
