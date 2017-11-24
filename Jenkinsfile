@@ -18,9 +18,14 @@ node {
    image.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
    }
-   stage 'Build & Push image' 
+   stage 'Build & Push image'
+   
    docker.withRegistry('https://54.227.175.229:8446', 'nexuscreds') {
         def customImage = docker.build("hello-java:latest")
+      
+        customImage.withRun('-p 9191:9090') {c ->
+        sh "${mvnHome}/bin/mvn verify"
+           
         /* Push the container to the custom Registry */
         customImage.push()
     }
