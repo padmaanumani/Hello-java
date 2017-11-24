@@ -19,7 +19,7 @@ node {
         sh "${mvnHome}/bin/mvn verify"
    }
    stage 'Push image'
-   docker.withRegistry("https://index.docker.io/v1/", "docker-registry") {
+   docker.withRegistry("https://index.docker.io/v1/", "dockercreds") {
           image.push()
    }
 
