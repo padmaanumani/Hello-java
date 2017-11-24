@@ -7,7 +7,7 @@
 
 	<servlet>
 		<servlet-name>HelloServlet</servlet-name>
-		<servlet-class>org.cloudfoundry.samples.HelloServlet</servlet-class>
+		<servlet-class>org.hello-java.samples.HelloServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
