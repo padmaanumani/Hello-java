@@ -20,7 +20,7 @@ node {
    }
    stage 'Build & Push image' 
    docker.withRegistry('https://54.227.175.229:8446', 'nexuscreds') {
-        def customImage = docker.build("hello-java:${env.BUILD_ID}")
+        def customImage = docker.build("hello-java:latest")
         /* Push the container to the custom Registry */
         customImage.push()
     }
