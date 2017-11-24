@@ -12,15 +12,15 @@ node {
   
    stage 'Build Docker image'
 
-   def image = docker.build('jenkins-docker/hello-java:1.0', '.')
+   def image = docker.build('jenkins-hello-java:latest', '.')
 
    stage 'Acceptance Tests'
    image.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
    }
    stage 'Push image'
-   docker.withRegistry("https://54.227.175.229:8443/", "nexuscreds") {
-          image.push()
+   docker.withRegistry("https://54.227.175.229:8446/", "nexuscreds") {
+          image.push('latest')
    }
 
 }
