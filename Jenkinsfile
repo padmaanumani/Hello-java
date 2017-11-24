@@ -12,14 +12,14 @@ node {
   
    stage 'Build Docker image'
 
-   def image = docker.build('devopsbasservice/hello-java:1.0', '.')
+   def image = docker.build('jenkins-docker/hello-java:1.0', '.')
 
    stage 'Acceptance Tests'
    image.withRun('-p 9191:9090') {c ->
         sh "${mvnHome}/bin/mvn verify"
    }
    stage 'Push image'
-   docker.withRegistry("https://54.227.175.229:8443/repository/jenkins-docker/", "nexuscreds") {
+   docker.withRegistry("http://54.227.175.229:8444/", "nexuscreds") {
           image.push()
    }
 
