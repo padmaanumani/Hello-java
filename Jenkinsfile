@@ -1,3 +1,4 @@
+echo 'heloo'
 env.dockerimagename="devopsbasservice/buildonframework:insights1.0"
 node {
    echo 'hi'
