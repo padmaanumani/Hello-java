@@ -4,7 +4,7 @@ node {
    stage ('SlackNotification') {
        
        
-       slackSend '@insightsbot Testme now'
+       slackSend channel: '#random', color: 'good', message: "@insightsbot Testme now", botuser:'insightsbot', teamDomain: 'ctsdevopsbot', token: 'dHiCcEtWs8TZjlzduAy2ttDA'
   	}
    
 
