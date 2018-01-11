@@ -3,7 +3,7 @@ node {
    
    stage ('SlackNotification') {
        
-       slackSend channel: '#random', color: 'good', message: "@insightsbot New Insights artifacts are uploaded to Nexus for commitID ", teamDomain: 'ctsdevopsbot', token: 'dHiCcEtWs8TZjlzduAy2ttDA'
+       slackSend channel: '#random', color: 'good', message: "@insightsbot Testme now", teamDomain: 'ctsdevopsbot', token: 'dHiCcEtWs8TZjlzduAy2ttDA'
   	}
    
 
