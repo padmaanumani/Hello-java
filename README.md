@@ -7,7 +7,7 @@ This sample (originally based on the [SpringSource sample](https://github.com/Sp
 Building the Application
 ------------------------
 
-Make sure you have [Maven](http://maven.apache.org/ "Maven") installed.
+Make sure you have [Maven](http://maven.apache.org/ "Maven") installed..
 Then, *cd* into the root directory and execute:
 
 	mvn clean package
